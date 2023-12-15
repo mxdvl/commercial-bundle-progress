@@ -24,7 +24,7 @@ const hashes = [
   "edafeadc33d0b1ad17b91e2055232e62252c713d", // Zeke
   "a03cf57de93c0a789e78ee9cba90471a217ca5c6", // Ravi
 
-  "main",
+  "6a615d80cfef6c26ffd3394e6092442133738f3a", // Last commit with graph
 ];
 
 const updateGraph = async (hash: string) => {

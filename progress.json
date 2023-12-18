@@ -1,5 +1,17 @@
 [
   {
+    "date": "2023-02-28T09:26:14Z",
+    "author": "James Gorrie",
+    "sha": "6a615d80cfef6c26ffd3394e6092442133738f3a",
+    "typed": 123,
+    "typedSize": 331672,
+    "untyped": 0,
+    "untypedSize": 0,
+    "percentage": 1,
+    "percentageSize": 1,
+    "totalSize": 331672
+  },
+  {
     "date": "2022-10-28T10:46:06Z",
     "author": "Ravi",
     "sha": "10773cbbaeb96c9b689dbecab04e29b24007f2fc",

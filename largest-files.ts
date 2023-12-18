@@ -23,7 +23,9 @@ const jsFiles = files
   .slice(0, 12)
   .map((file) => [file.size, file.path]);
 
-console.log(jsFiles);
+console.log(
+  jsFiles.length === 0 ? "No JS file found, TS conversion complete" : jsFiles,
+);
 
 Deno.writeTextFileSync(
   dir + "/public/build/largest-files.json",

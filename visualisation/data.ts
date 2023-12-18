@@ -1,4 +1,7 @@
-import { SimulationLinkDatum, SimulationNodeDatum } from "../d3/force.ts";
+import type {
+  SimulationLinkDatum,
+  SimulationNodeDatum,
+} from "https://esm.sh/d3-force@3.0.0";
 
 const repo = "guardian/frontend";
 const branch = "main";

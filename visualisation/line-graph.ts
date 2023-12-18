@@ -1,7 +1,7 @@
 import type { Progress } from "../progress.ts";
-import { curveBundle, line } from "../d3/shape.ts";
-// import { axisBottom, axisLeft } from "../d3/axis.ts";
-import { scaleLinear, scaleTime } from "../d3/scale.ts";
+
+import { curveBundle, line } from "https://esm.sh/d3-shape@3.1.0";
+import { scaleLinear, scaleTime } from "https://esm.sh/d3-scale@3.3.0";
 
 // Remote data from JSON //
 /**

@@ -1,12 +1,12 @@
-import { create } from "../d3/selection.ts";
-import { transition } from "../d3/transition.ts";
-import { schemeCategory10 } from "https://cdn.skypack.dev/d3-scale-chromatic@3?dts";
-import { scaleOrdinal } from "../d3/scale.ts";
-import { Data, Link, Node } from "./data.ts";
+import { create } from "https://esm.sh/d3-selection@3.0.0";
+import { transition } from "https://esm.sh/d3-transition@3.0.1";
+import { schemeCategory10 } from "https://esm.sh/d3-scale-chromatic@3.0.0";
+import { scaleOrdinal } from "https://esm.sh/d3-scale@3.3.0";
+import { type Data, type Link, type Node } from "./data.ts";
 import { height, width } from "./data.ts";
 import { xOrigin, yOrigin } from "./data.ts";
-import type { Simulation } from "../d3/force.ts";
 import { dragging } from "./simulation.ts";
+import { type Simulation } from "https://esm.sh/d3-force@3.0.0";
 
 /** ********************
  *      Constants     *
@@ -44,20 +44,22 @@ const updateSvgData = (
 ) => {
   const { links, nodes } = data;
 
-  // @ts-expect-error -- actually typeof d is Link
   const link = linkGroup
     .selectAll("line")
-    .data(links, (d: Link) => {
-      const s = isNode(d.source) ? d.source.id : d.source;
-      const t = isNode(d.target) ? d.target.id : d.target;
-      return `${s}--${t}`;
-    })
+    .data(
+      links,
+      // @ts-expect-error - for some reason this is not narrowed down
+      (d: Link) => {
+        const s = isNode(d.source) ? d.source.id : d.source;
+        const t = isNode(d.target) ? d.target.id : d.target;
+        return `${s}--${t}`;
+      },
+    )
     .join((enter) =>
       enter
         .append("line")
         .attr("stroke-width", 4)
         .call((t) =>
-          // @ts-expect-error -- issue with types https://github.com/DefinitelyTyped/DefinitelyTyped/issues/16176
           t.transition().duration(450)
             .attr("stroke-width", (l: Link) => l.value ?? null)
         )
@@ -76,7 +78,6 @@ const updateSvgData = (
         const newNode = enter.append("g")
           .attr("fill", "purple")
           .call((n) =>
-            // @ts-expect-error -- issue with types https://github.com/DefinitelyTyped/DefinitelyTyped/issues/16176
             n.transition().duration(600)
               .attr("fill", (d: Node) => scale(String(d.group)))
           )
@@ -137,7 +138,6 @@ const updateSvgData = (
         updatedNodes.select("circle")
           .attr("transform", "scale(4)")
           .call((c) =>
-            // @ts-expect-error -- transition
             c.transition().duration(600)
               .attr("transform", "scale(1)")
           );

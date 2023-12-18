@@ -1,4 +1,4 @@
-import * as Colours from "https://deno.land/std@0.102.0/fmt/colors.ts";
+import * as Colours from "https://deno.land/std@0.201.0/fmt/colors.ts";
 import { getTree } from "./visualisation/data.ts";
 // import { expandGlob } from "https://deno.land/std@0.102.0/fs/mod.ts";
 

@@ -1,30 +1,13 @@
-try {
-  const { files, diagnostics } = await Deno.emit("./index.js", {
-    bundle: "module",
-    check: false,
-    // sources: {
-    //   "./d3.ts": "",
-    //   "./directed-graph.ts": "",
-    // },
-  });
+import { fromFileUrl } from "https://deno.land/std@0.201.0/path/from_file_url.ts";
+import * as esbuild from "https://deno.land/x/esbuild@v0.19.2/mod.js";
+import { denoPlugins } from "https://deno.land/x/esbuild_deno_loader@0.8.2/mod.ts";
 
-  if (diagnostics.length) {
-    // there is something that impacted the emit
-    console.warn(Deno.formatDiagnostics(diagnostics));
-  }
+await esbuild.build({
+  plugins: [...denoPlugins()],
+  entryPoints: [fromFileUrl(import.meta.resolve("./main.ts"))],
+  outfile: "./public/build/bundle.js",
+  bundle: true,
+  format: "esm",
+});
 
-  for (const [fileName, text] of Object.entries(files)) {
-    const cleanName = fileName
-      .replace("deno:///", "")
-      .replace("https://", "external/");
-
-    console.log(`emitted ${cleanName} with a length of ${text.length}`);
-    await Deno.writeTextFile(
-      "./public/build/" +
-        cleanName,
-      text,
-    );
-  }
-} catch (error) {
-  console.log(error);
-}
+esbuild.stop();
